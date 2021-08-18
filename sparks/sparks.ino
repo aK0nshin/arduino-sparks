@@ -8,15 +8,15 @@ boolean sparkStatus[SPARK_PIN_COUNT];
 
 void setup() {
   randomSeed(analogRead(A0)); // А0 никуда не подключен, берём из него шум
-  initSpark();
+  initSparks();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  sparkCheck();
+  checkSparks();
 }
 
-void initSpark() {
+void initSparks() {
   for (int i = 0; i < SPARK_PIN_COUNT; i++) {
     pinMode(sparkPins[i], OUTPUT);
     digitalWrite(sparkPins[i], LOW);
@@ -25,7 +25,7 @@ void initSpark() {
   }
 }
 
-void sparkCheck() {
+void checkSparks() {
   for (int i = 0; i < SPARK_PIN_COUNT; i++) {
     if (millis() > sparkTime[i]) {
       switchSpark(i);
